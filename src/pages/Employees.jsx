@@ -34,7 +34,10 @@ export default function Employees() {
             name: 'name',
             placeholder: 'Name',
             value: newEmployee.name,
-            onChange: (e) => setNewEmployee({ ...newEmployee, name: e.target.value }),
+            onChange: (e) => {
+              const value = e.target.value.slice(0, 20)
+              setNewEmployee({ ...newEmployee, name: value })
+            },
             required: true
           },
           {
@@ -42,10 +45,14 @@ export default function Employees() {
             name: 'role',
             placeholder: 'Role',
             value: newEmployee.role,
-            onChange: (e) => setNewEmployee({ ...newEmployee, role: e.target.value }),
+            onChange: (e) => {
+              const value = e.target.value.slice(0, 20)
+              setNewEmployee({ ...newEmployee, role: value })
+            },
             required: true
           }
         ]}
+        
       />
 
       {employees.length === 0 ? (
@@ -72,7 +79,6 @@ export default function Employees() {
               { header: 'Role', accessor: 'role' },
             ]}
             data={filteredEmployees}
-            onEdit={() => { }}
             onDelete={handleDelete}
             onUpdate={handleUpdate}
           />
