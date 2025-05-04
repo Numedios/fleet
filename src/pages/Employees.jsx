@@ -13,7 +13,6 @@ export default function Employees() {
     handleDelete,
     handleUpdate,
   } = useEmployees()
-
   const [selectedRole, setSelectedRole] = useState('')
 
   const roles = [...new Set(employees.map(emp => emp.role))]
@@ -52,7 +51,7 @@ export default function Employees() {
             required: true
           }
         ]}
-        
+
       />
 
       {employees.length === 0 ? (

@@ -7,6 +7,12 @@ export default function useDevices() {
   const [employees, setEmployees] = useState([])
 
   useEffect(() => {
+    document.title = 'Fleet - Devices';
+  }, []);
+
+
+
+  useEffect(() => {
     fetchDevices()
     fetchEmployees()
   }, [])

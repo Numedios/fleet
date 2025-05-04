@@ -6,6 +6,9 @@ const apiUrl = import.meta.env.VITE_API_URL
 export function useEmployees() {
   const [employees, setEmployees] = useState([])
   const [newEmployee, setNewEmployee] = useState({ name: '', role: '' })
+  useEffect(() => {
+    document.title = 'Fleet - Employees';
+  }, []);
 
   useEffect(() => {
     fetchEmployees()

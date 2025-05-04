@@ -3,7 +3,7 @@ import React from 'react'
 export default function Filters({ title = 'Filters', filters, onChange }) {
   return (
     <div className="mb-4 bg-gray-100 p-4 rounded-xl shadow w-full">
-      <h1 className="text-2xl font-bold mb-4">{title}:</h1>
+      <h1 className="text-xl md:text-2xl font-bold mb-4">{title}:</h1>
       <div className="flex flex-col gap-y-2 md:flex-row md:gap-x-2">
         {filters.map(filter => (
           <select

@@ -13,7 +13,7 @@ export default function AddForm({
       onSubmit={onSubmit}
       className={`mb-6 bg-gray-100 p-4 rounded-xl shadow space-y-6 flex flex-col ${formClassName}`}
     >
-      {title && <h1 className="text-3xl font-semibold text-gray-900 mb-4">{title}</h1>}
+      {title && <h1 className="text-xl md:text-3xl font-semibold text-gray-900 mb-4">{title}</h1>}
 
       <div className="space-y-4 md:space-y-0 md:flex md:gap-x-4 md:items-center">
         {fields.map(field => {
