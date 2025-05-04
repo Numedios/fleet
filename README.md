@@ -6,4 +6,4 @@ Web app built with Vite, TypeScript, and Tailwind CSS.
 
 ```bash
 pnpm install
-pnpm run start
+pnpm run dev
