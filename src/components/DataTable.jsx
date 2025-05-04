@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { FaEdit, FaTrash, FaCheck, FaSort, FaSortUp, FaSortDown } from 'react-icons/fa'
 
 export default function DataTable({
   columns,
@@ -41,7 +42,7 @@ export default function DataTable({
   })
 
   return (
-    <div className="bg-white rounded-lg shadow-lg overflow-x-auto">
+    <div className="bg-white rounded-lg shadow-lg overflow-x-auto max-h-[500px] overflow-y-auto">
       <table className="w-full table-fixed border-collapse">
         <thead className="bg-gray-800 text-white sticky top-0 z-10">
           <tr>
@@ -54,8 +55,14 @@ export default function DataTable({
                 <div className="flex items-center justify-center gap-1">
                   {col.header}
                   {sortConfig.key === col.accessor ? (
-                    sortConfig.direction === 'asc' ? '🔼' : '🔽'
-                  ) : '↕️'}
+                    sortConfig.direction === 'asc' ? (
+                      <FaSortUp />
+                    ) : (
+                      <FaSortDown />
+                    )
+                  ) : (
+                    <FaSort />
+                  )}
                 </div>
               </th>
             ))}
@@ -108,29 +115,29 @@ export default function DataTable({
               <td className="p-2 flex flex-wrap justify-center gap-2">
                 {editingId === row.id ? (
                   <button
-                    className="bg-blue-500 text-white py-1 px-2 rounded-md hover:bg-blue-600"
+                    className="bg-green-100 text-green-700 p-2 rounded-md hover:bg-green-200"
                     onClick={() => {
                       onUpdate(row.id, editedRow)
                       setEditingId(null)
                       setEditedRow({})
                     }}
                   >
-                    ✅
+                    <FaCheck />
                   </button>
                 ) : (
                   <button
-                    className="bg-yellow-500 text-white py-1 px-2 rounded-md hover:bg-yellow-600"
+                    className="bg-gray-100 text-gray-700 p-2 rounded-md hover:bg-gray-200"
                     onClick={() => handleEdit(row)}
                   >
-                    ✏️
+                    <FaEdit />
                   </button>
                 )}
                 {editingId !== row.id && (
                   <button
-                    className="bg-red-500 text-white py-1 px-2 rounded-md hover:bg-red-600"
+                    className="bg-red-100 text-red-700 p-2 rounded-md hover:bg-red-200"
                     onClick={() => onDelete(row.id)}
                   >
-                    🗑️
+                    <FaTrash />
                   </button>
                 )}
               </td>

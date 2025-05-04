@@ -10,7 +10,7 @@ export default function Filters({ title = 'Filters', filters, onChange }) {
             key={filter.name}
             value={filter.value}
             onChange={(e) => onChange(filter.name, e.target.value)}
-            className="border p-2 rounded-md focus:outline-none focus:ring focus:border-blue-300 flex-1 max-h-[48px] overflow-y-auto"
+            className="border p-2 rounded-md focus:outline-none focus:ring focus:border-blue-300 w-full md:w-auto md:min-w-[150px] md:max-w-[200px]"
           >
             <option value="">{filter.placeholder}</option>
             {filter.options.map(opt => (
