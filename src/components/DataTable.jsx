@@ -8,6 +8,7 @@ export default function DataTable({
 }) {
   const [editingId, setEditingId] = useState(null)
   const [editedRow, setEditedRow] = useState({})
+  const [sortConfig, setSortConfig] = useState({ key: null, direction: 'asc' })
 
   const handleEdit = (row) => {
     setEditingId(row.id)
@@ -18,21 +19,51 @@ export default function DataTable({
     setEditedRow({ ...editedRow, [field]: value })
   }
 
+  const handleSort = (key) => {
+    if (sortConfig.key === key) {
+      setSortConfig({
+        key,
+        direction: sortConfig.direction === 'asc' ? 'desc' : 'asc',
+      })
+    } else {
+      setSortConfig({ key, direction: 'asc' })
+    }
+  }
+
+  const sortedData = [...data].sort((a, b) => {
+    if (!sortConfig.key) return 0
+    const aValue = a[sortConfig.key]
+    const bValue = b[sortConfig.key]
+
+    if (aValue < bValue) return sortConfig.direction === 'asc' ? -1 : 1
+    if (aValue > bValue) return sortConfig.direction === 'asc' ? 1 : -1
+    return 0
+  })
+
   return (
     <div className="bg-white rounded-lg shadow-lg overflow-x-auto">
       <table className="w-full table-fixed border-collapse">
         <thead className="bg-gray-800 text-white sticky top-0 z-10">
           <tr>
             {columns.map(col => (
-              <th key={col.accessor} className="p-2 text-center min-w-[150px] break-words">
-                {col.header}
+              <th
+                key={col.accessor}
+                className="p-2 text-center min-w-[150px] break-words cursor-pointer select-none"
+                onClick={() => handleSort(col.accessor)}
+              >
+                <div className="flex items-center justify-center gap-1">
+                  {col.header}
+                  {sortConfig.key === col.accessor ? (
+                    sortConfig.direction === 'asc' ? '🔼' : '🔽'
+                  ) : '↕️'}
+                </div>
               </th>
             ))}
             <th className="p-2 text-center min-w-[100px]">Actions</th>
           </tr>
         </thead>
         <tbody>
-          {data.map(row => (
+          {sortedData.map(row => (
             <tr key={row.id} className="border-b border-gray-200">
               {columns.map(col => (
                 <td key={col.accessor} className="p-2 text-center break-words">
