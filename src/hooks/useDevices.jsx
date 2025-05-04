@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
+const apiUrl = import.meta.env.VITE_API_URL
 
 export default function useDevices() {
   const [devices, setDevices] = useState([])
@@ -12,7 +13,7 @@ export default function useDevices() {
 
   const fetchDevices = async () => {
     try {
-      const response = await axios.get('http://localhost:3000/api/devices')
+      const response = await axios.get(`${apiUrl}/api/devices`)
       setDevices(response.data)
     } catch (error) {
       console.error('Error fetching devices:', error)
@@ -21,7 +22,7 @@ export default function useDevices() {
 
   const fetchEmployees = async () => {
     try {
-      const response = await axios.get('http://localhost:3000/api/employees')
+      const response = await axios.get(`${apiUrl}/api/employees`)
       setEmployees(response.data)
     } catch (error) {
       console.error('Error fetching employees:', error)
@@ -30,7 +31,7 @@ export default function useDevices() {
 
   const addDevice = async (device) => {
     try {
-      await axios.post('http://localhost:3000/api/devices', device)
+      await axios.post(`${apiUrl}/api/devices`, device)
       await fetchDevices()
     } catch (error) {
       console.error('Error adding device:', error)
@@ -39,7 +40,7 @@ export default function useDevices() {
 
   const updateDevice = async (id, updatedDevice) => {
     try {
-      await axios.patch(`http://localhost:3000/api/devices/${id}`, updatedDevice)
+      await axios.patch(`${apiUrl}/api/devices/${id}`, updatedDevice)
       await fetchDevices()
     } catch (error) {
       console.error('Error updating device:', error)
@@ -48,7 +49,7 @@ export default function useDevices() {
 
   const deleteDevice = async (id) => {
     try {
-      await axios.delete(`http://localhost:3000/api/devices/${id}`)
+      await axios.delete(`${apiUrl}/api/devices/${id}`)
       await fetchDevices()
     } catch (error) {
       console.error('Error deleting device:', error)

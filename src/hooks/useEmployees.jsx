@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 
+const apiUrl = import.meta.env.VITE_API_URL
+
 export function useEmployees() {
   const [employees, setEmployees] = useState([])
   const [newEmployee, setNewEmployee] = useState({ name: '', role: '' })
@@ -11,7 +13,7 @@ export function useEmployees() {
 
   const fetchEmployees = async () => {
     try {
-      const response = await axios.get('http://localhost:3000/api/employees')
+      const response = await axios.get(`${apiUrl}/api/employees`)
       setEmployees(response.data)
     } catch (error) {
       console.error(error)
@@ -25,7 +27,7 @@ export function useEmployees() {
       return
     }
     try {
-      await axios.post('http://localhost:3000/api/employees', newEmployee)
+      await axios.post(`${apiUrl}/api/employees`, newEmployee)
       setNewEmployee({ name: '', role: '' })
       await fetchEmployees()
     } catch (error) {
@@ -35,7 +37,7 @@ export function useEmployees() {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:3000/api/employees/${id}`)
+      await axios.delete(`${apiUrl}/api/employees/${id}`)
       await fetchEmployees()
     } catch (error) {
       console.error(error)
@@ -44,7 +46,7 @@ export function useEmployees() {
 
   const handleUpdate = async (id, updatedData) => {
     try {
-      await axios.patch(`http://localhost:3000/api/employees/${id}`, updatedData)
+      await axios.patch(`${apiUrl}/api/employees/${id}`, updatedData)
       await fetchEmployees()
     } catch (error) {
       console.error(error)
