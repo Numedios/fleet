@@ -47,28 +47,37 @@ export default function Employees() {
           }
         ]}
       />
-      <Filters
-        filters={[
-          {
-            name: 'selectedRole',
-            value: selectedRole,
-            placeholder: 'All roles',
-            options: roles.map(role => ({ value: role, label: role }))
-          }
-        ]}
-        onChange={(name, value) => setSelectedRole(value)}
-      />
 
-      <DataTable
-        columns={[
-          { header: 'Name', accessor: 'name' },
-          { header: 'Role', accessor: 'role' },
-        ]}
-        data={filteredEmployees}
-        onEdit={() => { }}
-        onDelete={handleDelete}
-        onUpdate={handleUpdate}
-      />
+      {employees.length === 0 ? (
+        <div className="mt-4 p-4 bg-yellow-100 text-yellow-800 rounded">
+          No employees yet. Please add employees to enable device management.
+        </div>
+      ) : (
+        <>
+          <Filters
+            filters={[
+              {
+                name: 'selectedRole',
+                value: selectedRole,
+                placeholder: 'All roles',
+                options: roles.map(role => ({ value: role, label: role }))
+              }
+            ]}
+            onChange={(name, value) => setSelectedRole(value)}
+          />
+
+          <DataTable
+            columns={[
+              { header: 'Name', accessor: 'name' },
+              { header: 'Role', accessor: 'role' },
+            ]}
+            data={filteredEmployees}
+            onEdit={() => { }}
+            onDelete={handleDelete}
+            onUpdate={handleUpdate}
+          />
+        </>
+      )}
     </div>
   )
 }

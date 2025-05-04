@@ -21,22 +21,22 @@ export default function DataTable({
 
   return (
     <div className="bg-white rounded-lg shadow-lg overflow-x-auto">
-      <table className="min-w-full table-auto border-collapse">
-        <thead className="bg-gray-800 text-white border-b border-gray-300 sticky top-0 z-10">
+      <table className="w-full table-fixed border-collapse">
+        <thead className="bg-gray-800 text-white sticky top-0 z-10">
           <tr>
             {columns.map(col => (
-              <th key={col.accessor} className="p-4 text-center">
+              <th key={col.accessor} className="p-2 text-center min-w-[150px] break-words">
                 {col.header}
               </th>
             ))}
-            <th className="p-4 text-center">Actions</th>
+            <th className="p-2 text-center min-w-[100px]">Actions</th>
           </tr>
         </thead>
         <tbody>
           {data.map(row => (
             <tr key={row.id} className="border-b border-gray-200">
               {columns.map(col => (
-                <td key={col.accessor} className="p-4 text-center">
+                <td key={col.accessor} className="p-2 text-center break-words">
                   {editingId === row.id ? (
                     col.options ? (
                       <select
@@ -75,32 +75,32 @@ export default function DataTable({
                   )}
                 </td>
               ))}
-              <td className="p-4 flex justify-center gap-2">
+              <td className="p-2 flex flex-wrap justify-center gap-2">
                 {editingId === row.id ? (
                   <button
-                    className="bg-blue-500 text-white py-1 px-3 rounded-md hover:bg-blue-600"
+                    className="bg-blue-500 text-white py-1 px-2 rounded-md hover:bg-blue-600"
                     onClick={() => {
                       onUpdate(row.id, editedRow)
                       setEditingId(null)
                       setEditedRow({})
                     }}
                   >
-                    Confirm
+                    ✅
                   </button>
                 ) : (
                   <button
-                    className="bg-yellow-500 text-white py-1 px-3 rounded-md hover:bg-yellow-600"
+                    className="bg-yellow-500 text-white py-1 px-2 rounded-md hover:bg-yellow-600"
                     onClick={() => handleEdit(row)}
                   >
-                    Edit
+                    ✏️
                   </button>
                 )}
                 {editingId !== row.id && (
                   <button
-                    className="bg-red-500 text-white py-1 px-3 rounded-md hover:bg-red-600"
+                    className="bg-red-500 text-white py-1 px-2 rounded-md hover:bg-red-600"
                     onClick={() => onDelete(row.id)}
                   >
-                    Delete
+                    🗑️
                   </button>
                 )}
               </td>

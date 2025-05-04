@@ -9,34 +9,46 @@ export function useEmployees() {
     fetchEmployees()
   }, [])
 
-  const fetchEmployees = () => {
-    axios.get('http://localhost:3000/api/employees')
-      .then(response => setEmployees(response.data))
-      .catch(error => console.error(error))
+  const fetchEmployees = async () => {
+    try {
+      const response = await axios.get('http://localhost:3000/api/employees')
+      setEmployees(response.data)
+    } catch (error) {
+      console.error(error)
+    }
   }
 
-  const handleAddEmployee = (e) => {
+  const handleAddEmployee = async (e) => {
     e.preventDefault()
     if (!newEmployee.name || !newEmployee.role) {
       alert('Veuillez remplir le nom et le rôle.')
       return
     }
-    axios.post('http://localhost:3000/api/employees', newEmployee)
-      .then(() => {
-        setNewEmployee({ name: '', role: '' })
-        fetchEmployees()
-      })
-      .catch(error => console.error(error))
+    try {
+      await axios.post('http://localhost:3000/api/employees', newEmployee)
+      setNewEmployee({ name: '', role: '' })
+      await fetchEmployees()
+    } catch (error) {
+      console.error(error)
+    }
   }
 
-  const handleDelete = (id) => {
-    axios.delete(`http://localhost:3000/api/employees/${id}`)
-      .then(fetchEmployees)
+  const handleDelete = async (id) => {
+    try {
+      await axios.delete(`http://localhost:3000/api/employees/${id}`)
+      await fetchEmployees()
+    } catch (error) {
+      console.error(error)
+    }
   }
 
-  const handleUpdate = (id, updatedData) => {
-    axios.patch(`http://localhost:3000/api/employees/${id}`, updatedData)
-      .then(fetchEmployees)
+  const handleUpdate = async (id, updatedData) => {
+    try {
+      await axios.patch(`http://localhost:3000/api/employees/${id}`, updatedData)
+      await fetchEmployees()
+    } catch (error) {
+      console.error(error)
+    }
   }
 
   return {
