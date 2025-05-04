@@ -24,7 +24,7 @@ export default function AddForm({
                 name={field.name}
                 value={field.value}
                 onChange={field.onChange}
-                className="border p-2 w-full md:w-auto rounded-md focus:outline-none focus:ring focus:border-blue-300"
+                className="cursor-pointer border p-2 w-full md:w-auto rounded-md focus:outline-none focus:ring focus:border-blue-300 hover:border-blue-400 transition-all duration-200"
                 required={field.required}
               >
                 <option value="">{field.placeholder}</option>
@@ -44,7 +44,7 @@ export default function AddForm({
               placeholder={field.placeholder}
               value={field.value}
               onChange={field.onChange}
-              className="border p-2 w-full md:w-auto rounded-md focus:outline-none focus:ring focus:border-blue-300"
+              className="border p-2 w-full md:w-auto rounded-md focus:outline-none focus:ring focus:border-blue-300 transition-all duration-200"
               required={field.required}
             />
           )
@@ -52,7 +52,7 @@ export default function AddForm({
 
         <button
           type="submit"
-          className={`bg-green-500 text-white p-2 rounded-md w-full md:w-auto hover:bg-green-600 h-10 ${buttonClassName}`}
+          className={`cursor-pointer bg-green-500 text-white p-2 rounded-md w-full md:w-auto hover:bg-green-600 transition-all duration-200 h-10 ${buttonClassName}`}
         >
           {buttonText}
         </button>
